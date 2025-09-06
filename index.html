@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mateusz Wiśniewski – Mobile Developer</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="favicon.png" type="image/x-icon" />
+</head>
+<body>
+  <!-- Top navigation bar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="#hero" class="logo">Wiśniewski Mobile Development</a>
+      <ul class="nav-links">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#stack">Tech Stack</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1>Fun to play. Safe to use.</h1>
+        <p>Mobile games & apps by Mateusz Wiśniewski.</p>
+        <a href="#contact" class="btn-hero">Contact Me</a>
+      </div>
+      <div class="hero-image">
+        <img src="hero.png" alt="Developer character" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main>
+
+    <section id="stack">
+        <h2>Tech Stack</h2>
+        <div class="tech-line">
+          <img src="icons/html.png" alt="HTML" title="HTML" />
+          <img src="icons/css.png" alt="CSS" title="CSS" />
+          <img src="icons/javascript.png" alt="JavaScript" title="JavaScript" />
+          <img src="icons/react.png" alt="React" title="React" />
+          <img src="icons/firebase.png" alt="Firebase" title="Firebase" />
+          <img src="icons/git.png" alt="Git" title="Git" />
+          <img src="icons/figma.png" alt="Figma" title="Figma" />
+          <img src="icons/photoshop.png" alt="Photoshop" title="Photoshop" />
+        </div>
+      </section>
+
+      <section id="projects">
+        <h2>Projects</h2>
+        <div class="project-cards">
+          <div class="card">
+            <img src="project1.png" alt="App icon" />
+            <h3>Bubble Path</h3>
+            <p class="status">In development</p>
+          </div>
+      
+          <div class="card">
+            <img src="project2.png" alt="App icon" />
+            <h3>Color Matchy</h3>
+            <p class="status">In development</p>
+          </div>
+      
+          <div class="card">
+            <img src="project3.png" alt="App icon" />
+            <h3>Shape Swipe</h3>
+            <p class="status">In development</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <h2>Contact Me</h2>
+        <form id="contact-form" action="https://formspree.io/f/xvgbvlkz" method="POST" class="contact-form">
+          <input type="text" name="name" placeholder="Your name" required />
+          <input type="email" name="email" placeholder="Your email" required />
+          <textarea name="message" placeholder="Your message" required></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+      </section>
+
+        <!-- Modal -->
+    <div id="successModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3>✅ Thank you!</h3>
+      <p>Your message has been sent successfully.</p>
+      <button id="closeModal">OK</button>
+    </div>
+  </div>
+      </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Mateusz Wiśniewski |
+      <a href="privacy-policy.html">Privacy Policy</a>
+    </p>
+  </footer>
+
+  <script>
+    const form = document.getElementById("contact-form");
+    const modal = document.getElementById("successModal");
+    const closeModal = document.getElementById("closeModal");
+    const closeX = document.querySelector(".close");
+  
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const response = await fetch(form.action, {
+        method: form.method,
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+  
+      if (response.ok) {
+        modal.style.display = "flex";
+        form.reset();
+      } else {
+        alert("❌ Oops! Something went wrong.");
+      }
+    });
+  
+    closeModal.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+  
+    closeX.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+  
+    window.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.style.display = "none";
+      }
+    });
+  </script>
+
+<script>
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll(".nav-links li a");
+  
+    window.addEventListener("scroll", () => {
+      let current = "";
+  
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        const sectionHeight = section.clientHeight;
+        if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+          current = section.getAttribute("id");
+        }
+      });
+  
+      navLinks.forEach(link => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === "#" + current) {
+          link.classList.add("active");
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
